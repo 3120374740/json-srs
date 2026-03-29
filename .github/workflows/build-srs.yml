@@ -1,0 +1,37 @@
+name: Build SRS Rule
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download sing-box
+        run: |
+          curl -Lo sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/latest/download/sing-box-*-linux-amd64.tar.gz
+          tar zxf sing-box.tar.gz
+          cp sing-box-*/sing-box .
+          chmod +x sing-box
+
+      - name: Download AWAvenue ad rule
+        run: |
+          curl -Lo AWAvenue-Ads-Rule-Singbox.json https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json
+
+      - name: Convert JSON to SRS
+        run: |
+          ./sing-box rule-set compile --output AWAvenue-Ads-Rule-Singbox.srs AWAvenue-Ads-Rule-Singbox.json
+
+      - name: Commit and push
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: Auto build SRS rule
+          add: "*.srs"
