@@ -23,10 +23,16 @@ jobs:
       - name: Download AWAvenue ad rule
         run: |
           curl -Lo AWAvenue-Ads-Rule-Singbox.json https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox.json
+          curl -Lo AWAvenue-Ads-Rule-Singbox-No.Privacy.json https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox-No.Privacy.json
+          curl -Lo AWAvenue-Ads-Rule-Singbox-No.Unwelcome.json https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox-No.Unwelcome.json
+          curl -Lo AWAvenue-Ads-Rule-Singbox-Only.Ads.json https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Singbox-Only.Ads.json
 
       - name: Convert JSON to SRS
         run: |
           ./sing-box rule-set compile --output AWAvenue-Ads-Rule-Singbox.srs AWAvenue-Ads-Rule-Singbox.json
+          ./sing-box rule-set compile --output AWAvenue-Ads-Rule-Singbox-No.Privacy.srs AWAvenue-Ads-Rule-Singbox-No.Privacy.json
+          ./sing-box rule-set compile --output AWAvenue-Ads-Rule-Singbox-No.Unwelcome.srs AWAvenue-Ads-Rule-Singbox-No.Unwelcome.json
+          ./sing-box rule-set compile --output AWAvenue-Ads-Rule-Singbox-Only.Ads.srs AWAvenue-Ads-Rule-Singbox-Only.Ads.json
 
       - name: Commit and push
         uses: EndBug/add-and-commit@v9
