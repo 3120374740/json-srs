@@ -15,9 +15,9 @@ jobs:
 
       - name: Download sing-box (fixed version)
         run: |
-          curl -Lo sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.11.8/sing-box-1.11.8-linux-amd64.tar.gz
+          curl -Lo sing-box.tar.gz https://github.com/SagerNet/sing-box/releases/download/v1.14.4/sing-box-1.14.4-linux-amd64.tar.gz
           tar zxf sing-box.tar.gz
-          cp sing-box-1.11.8-linux-amd64/sing-box .
+          cp sing-box-1.14.4-linux-amd64/sing-box .
           chmod +x sing-box
 
       - name: Download AWAvenue ad rule
